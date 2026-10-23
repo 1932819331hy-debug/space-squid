@@ -65,10 +65,10 @@ export const entity = function (entity: Entity, serv: Server) {
   entity.getOthers = () => Object.fromEntries(Object.entries(serv.entities).filter(([id]) => id !== entity.id && serv.entities[id].ready))
 
   entity.getNearbyPlayers = (radius = entity.viewDistance) => entity.getNearby()
-    .filter((e) => e.type === 'player' && entity.position.distanceTo(entity.position) <= radius) as Player[]
+    .filter((e) => e.type === 'player' && e.position.distanceTo(entity.position) <= radius) as Player[]
 
   entity.nearbyPlayers = (radius = entity.viewDistance) => entity.nearbyEntities
-    .filter(e => e.type === 'player' && entity.position.distanceTo(entity.position) <= radius) as Player[]
+    .filter(e => e.type === 'player' && e.position.distanceTo(entity.position) <= radius) as Player[]
 
   entity._writeOthers = (packetName, packetFields) =>
     serv._writeArray(packetName, packetFields, entity.getOtherPlayers())
